@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script
+            src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
+            type="application/javascript"
+    ></script>
+    <script>
+        async function getBlockheight() {
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            // Prompt user for account connections
+            await provider.send("eth_requestAccounts", []);
+            const signer = provider.getSigner();
+
+            console.log("Account:", await signer.getAddress());
+            var blockheight = await provider.getBlockNumber();
+            console.log("Blockheight: ", blockheight);
+
+            document.getElementById("output1").innerText = "Blockheight: " + blockheight;
+        }
+    </script>
+</head>
+<body>
+<button id="button1" onclick="getBlockheight()">Get Blockheight</button>
+<p id="output1"></p>
+</body>
+</html>
